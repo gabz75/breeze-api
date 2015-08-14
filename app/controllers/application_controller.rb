@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound do |error|
     render json: error, status: :not_found
   end
+
+  rescue_from ActionController::ParameterMissing do |exception|
+    render json: error, status: :not_found
+  end
 end
