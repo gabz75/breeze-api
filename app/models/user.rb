@@ -14,15 +14,17 @@ class User < ActiveRecord::Base
   LATE_FEE = 5.0
 
   def charge_late_fee(days)
-    items.create(item_type: 'fee', amount: LATE_FEE * days)
+    items.create(item_type: 'fee', amount: LATE_FEE * days, date: Time.now)
     update(balance: balance - LATE_FEE * days)
   end
 
   def mark_as_delinquent
+    update(delinquent: true, last_delinquent_at: Time.now)
     move_or_create_to_list(OPEN_LIST)
   end
 
   def mark_as_clean
+    update(delinquent: false)
     move_or_create_to_list(RESOLVED_LIST)
   end
 

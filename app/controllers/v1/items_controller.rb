@@ -6,11 +6,15 @@ module V1
     before_action :find_user
 
     def create
+      @previous_item = @user.items.last
+      @previously_delinquent = @user.delinquent
       @item = @user.items.create(item_params)
 
       if @item.persisted?
-        balance_check
-        render json: @item, status: :created
+        @user.process_balance
+        trello_integration()
+        late_fee()
+        render json: @user, status: :created
       else
         render json: { errors: @item.errors }, status: :unprocessable_entity
       end
@@ -18,15 +22,21 @@ module V1
 
     private
 
-    def balance_check
-      new_balance = @user.process_balance
-      if new_balance < THRESHOLD
-        # @user.charge_late
+    def trello_integration
+      if @user.balance < THRESHOLD and !@previously_delinquent
         @user.mark_as_delinquent
-      else
+      elsif @user.balance >= THRESHOLD and @previously_delinquent
         @user.mark_as_clean
       end
     end
+
+    def late_fee
+      if @previous_item and @previously_delinquent
+        days = ((@item.date - @previous_item.date) / (24 * 3600)).to_i
+        @user.charge_late_fee(days)
+      end
+    end
+
 
     def find_user
       @user = User.find(params[:user_id])
@@ -38,4 +48,3 @@ module V1
 
   end
 end
-

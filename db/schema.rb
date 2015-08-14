@@ -17,15 +17,18 @@ ActiveRecord::Schema.define(version: 20150814165228) do
     t.integer  "user_id"
     t.string   "item_type"
     t.float    "amount"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.float    "balance",     default: 0.0
+    t.float    "balance",            default: 0.0
     t.string   "trello_card"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "delinquent",         default: false
+    t.datetime "last_delinquent_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
 end

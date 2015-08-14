@@ -13,12 +13,12 @@ describe User do
   context 'given a bunch of items' do
 
     before :each do
-      subject.items.create(item_type: 'fee', amount: 200.0)
-      subject.items.create(item_type: 'fee', amount: 50.0)
-      subject.items.create(item_type: 'fee', amount: 12.0)
-      subject.items.create(item_type: 'payment', amount: 20.0)
-      subject.items.create(item_type: 'payment', amount: 130.5)
-      subject.items.create(item_type: 'payment', amount: 64.0)
+      subject.items.create(item_type: 'fee', amount: 200.0, date: '2015-05-10')
+      subject.items.create(item_type: 'fee', amount: 50.0, date: '2015-05-10')
+      subject.items.create(item_type: 'fee', amount: 12.0, date: '2015-05-10')
+      subject.items.create(item_type: 'payment', amount: 20.0, date: '2015-05-10')
+      subject.items.create(item_type: 'payment', amount: 130.5, date: '2015-05-10')
+      subject.items.create(item_type: 'payment', amount: 64.0, date: '2015-05-10')
     end
 
     it 'should return only fees' do

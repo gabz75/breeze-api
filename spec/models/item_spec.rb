@@ -12,8 +12,8 @@ describe Item do
   end
 
   it 'should have restricted types' do
-    expect(user.items.create(amount: 0, item_type: 'wrong')).to_not be_persisted
-    expect(user.items.create(amount: 0, item_type: 'fee')).to be_persisted
-    expect(user.items.create(amount: 0, item_type: 'payment')).to be_persisted
+    expect(user.items.create(amount: 0, date: '2015-01-01', item_type: 'wrong')).to_not be_persisted
+    expect(user.items.create(amount: 0, date: '2015-01-01', item_type: 'fee')).to be_persisted
+    expect(user.items.create(amount: 0, date: '2015-01-01', item_type: 'payment')).to be_persisted
   end
 end

@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
 
   validates :item_type, presence: true, format: /\Apayment|fee\z/
   validates :amount, presence: true
+  validates :date, presence: true
 
   scope :fees, -> { where(item_type: 'fee') }
   scope :payments, -> { where(item_type: 'payment') }

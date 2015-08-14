@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.belongs_to :user
       t.string :item_type
       t.float :amount
+      t.datetime :date
       t.timestamps null: false
     end
   end
