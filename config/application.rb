@@ -24,3 +24,6 @@ module BreezeApi
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+ENV['TRELLO_DEVELOPER_PUBLIC_KEY'] = '4b2c1c5260bf14784b6b50639cc5a698'
+ENV['TRELLO_MEMBER_TOKEN'] = 'b4f8a52fefd56567f03f2ca890a8f0a3e6fa7fb23cfc8613b3398669e26d7e1d'
