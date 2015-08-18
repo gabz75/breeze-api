@@ -12,8 +12,8 @@ module V1
 
       if @item.persisted?
         @user.process_balance
-        trello_integration()
-        late_fee()
+        trello_integration
+        late_fee
         render json: @user, status: :created
       else
         render json: { errors: @item.errors }, status: :unprocessable_entity

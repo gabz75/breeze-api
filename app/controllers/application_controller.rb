@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActionController::ParameterMissing do |exception|
-    render json: error, status: :not_found
+    render json: error, status: :bad_request
   end
 end
